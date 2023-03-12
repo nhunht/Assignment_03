@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Avatar -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+    <title><%= title %></title>
+</head>
+
+<body>
+    <nav class="navbar" style="background: blue;" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <div class="tabs is-large">
+                <a href="/">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV5nyBspTX9fE7joIYpK-1sPcplcNe-a7ErQ&usqp=CAU"
+                        width="120" height="320">
+                </a>
+                <a href="/" style="color: black;">
+                    <span class="icon is-small"><i class="fas fa-home" aria-hidden="true"></i></span>
+                    <span>Home</span>
+                </a>
+                <a href="/players" style="color: black;">
+                    <span class="icon is-small"><i class="fas fa-futbol" aria-hidden="true"></i></span>
+                    <span>Players</span>
+                </a>
+                <a href="/nations" style="color: black;">
+                    <span class="icon is-small"><i class="fas fa-flag" aria-hidden="true"></i></span>
+                    <span>Nations</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="navbar-menu">
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons is-right">
+                        <div class="dropdown is-hoverable" style="color: black;">
+                            <div class="dropdown-trigger">
+                                <i class="fa fa-user" aria-haspopup="true" aria-controls="dropdown-menu"
+                                    aria-hidden="true"></i>
+                                <span>Nguyen Huynh Truc Nhu</span>
+                            </div>
+                            <div class="dropdown-menu notification is-primary is-light" id="dropdown-menu" role="menu">
+                                <span>Welcome!</span>
+                                <div class="dropdown-menu-min-width">
+                                    <a href="/users" class="dropdown-item fa fa-user">
+                                        My profile
+                                    </a>
+                                    <a class="dropdown-item fa fa-key">
+                                        Chang password
+                                    </a>
+                                    <a class="dropdown-item" style="background-color: red; color: white;"
+                                        href="/users/login">
+                                        <%= button %>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="notification is-link is-light" style="background-color: rgb(205, 223, 247);">
+        <div class="buttons is-right">
+            <button class="button" style="background-color: green; color: white;" onclick="openPopup()">
+                Add
+            </button>
+        </div>
+        <table class="table is-fullwidth">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Goals</th>
+                    <th>Is Captain</th>
+                    <th <%= isAdmin %>>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% players.forEach(function(player){ %>
+                <tr>
+                    <td>
+                        <figure class="image is-64x64">
+                            <img src=<%= player.image %>>
+                        </figure>
+                    </td>
+                    <td> <%= player.name %> </td>
+                    <td> <%= player.position %> </td>
+                    <td> <%= player.goals %> </td>
+                    <td> <%= player.isCaptain %> </td>
+                    <td <%= isAdmin %>>
+                        <div class="dropdown is-hoverable">
+                            <div class="dropdown-trigger">
+                                <i class="fa fa-bars" aria-haspopup="true" aria-controls="dropdown-menu"
+                                    aria-hidden="true"></i>
+                            </div>
+                            <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                                <div class="dropdown-content">
+                                    <a href="/players/edit/<%= player.id %>" class="dropdown-item"
+                                        style="background-color: green; color: white;">
+                                        Edit
+                                    </a>
+                                    <a href="/players/delete/<%= player.id %>" class="dropdown-item"
+                                        style="background-color: red; color: white"
+                                        onclick="return confirm('Are you sure to delete?')">
+                                        Delete
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <% })%>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="popup" class="modal">
+        <div class="modal-background" onclick="closePopup()"></div>
+        <div class="modal-card">
+            <header class="modal-card-head" style="background-color: blue">
+                <p class="modal-card-title" style="color: black;">Add Player</p>
+                <button class="delete" aria-label="close" style="background-color: red;"
+                    onclick="closePopup()"></button>
+            </header>
+            <section class="modal-card-body">
+                <form id="newPlayerForm" method="post">
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="width: 10%;">Name:</label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control" style="width: 90%;">
+                                    <div class="control">
+                                        <input class="input" type="text" id="name" name="name"
+                                            placeholder="e.g. Truc Nhu" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="width: 10%;">Nation:</label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field is-narrow">
+                                <div class="control" style="width: 100%;">
+                                    <div class="select is-fullwidth">
+                                        <select name="nation">
+                                            <%for (let nation of nations){ %>
+                                            <option value="<%= nation._id %>"><%= nation.name %></option>
+                                            <% } %>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="width: 10%;">Position:</label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field is-narrow">
+                                <div class="control" style="width: 100%;">
+                                    <div class="select is-fullwidth">
+                                        <select name="position">
+                                            <%for (let position of positionList){ %>
+                                            <option value="<%= position.name %>"><%= position.name %></option>
+                                            <% } %>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="width:10%;">IsCaptain?</label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field is-narrow">
+                                <div class="control" style="width: 100%;">
+                                    <div class="select is-fullwidth">
+                                        <select name="isCaptain">
+                                            <option value="true">True</option>
+                                            <option value="false">False</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="width: 10%;">Goals: </label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control" style="width: 90%;">
+                                    <input class="input is-info" id="goals" name="goals" min="0" type="number"
+                                        placeholder="goals" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="width: 10%;" for="image">Image URL:</label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control" style="width: 90%;">
+                                    <input class="input" type="url" id="image" name="image" placeholder="URL of image"
+                                        required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <button class="button is-success">Add</button>
+                    <button class="button" onclick="closePopup()">Cancel</button> -->
+                </form>
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button is-success" onclick="submitForm()">Add</button>
+                <button class="button" style="background-color: red; color: white;"
+                    onclick="closePopup()">Cancel</button>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        function openPopup() {
+            document.getElementById("popup").classList.add("is-active");
+        }
+
+        function closePopup() {
+            document.getElementById("popup").classList.remove("is-active");
+        }
+
+        function submitForm() {
+            var formData = new FormData(document.getElementById('newPlayerForm'));
+            var player = {
+                name: formData.get('name'),
+                nation: formData.get('nation'),
+                club: formData.get('club'),
+                image: formData.get('image'),
+                position: formData.get('position'),
+                goals: formData.get('goals') ? formData.get('goals') : 0,
+                isCaptain: formData.get('isCaptain')
+            }
+            // check if any field is empty
+            if (player.name == "" || player.nation == "" || player.club == "" || player.image == "" || player
+                .position == "" || player.goals == "" || player.isCaptain == "") {
+                alert("Please fill in all fields");
+            } else if (!player.image.match(
+                    /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/
+                )) {
+                alert("Please enter a valid URL");
+
+            } else {
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/players', true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(JSON.stringify(player));
+
+                closePopup();
+
+                location.reload();
+            }
+        }
+    </script>
+</body>
+
+</html>

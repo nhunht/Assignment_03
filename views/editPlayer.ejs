@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+    <style>
+        .input {
+            width: 50%;
+        }
+    </style>
+
+    <title><%= title %></title>
+</head>
+
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://bulma.io">
+                <img src="https://gamek.mediacdn.vn/zoom/600_315/133514250583805952/2022/11/22/avatar1669101028096-1669101028759775287725.png"
+                    width="50" height="150">
+                <h1 style="font-size: xx-large; padding-left: 10px;">FIFA World cup Qatar 2022</h1>
+            </a>
+        </div>
+    </nav>
+    <div class="column">
+        <form method="post">
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Name</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <input value="<%= player.name %>" class="input is-info" name="name" type="text" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Nation</label>
+                </div>
+                <div class="field-body">
+                    <div class="field is-narrow">
+                        <div class="control">
+                            <div class="select is-fullwidth">
+                                <select name="nation">
+                                    <%for (let nation of nations){ %>
+                                    <option value="<%= nation._id %>"
+                                        <%= JSON.stringify(nation._id) === JSON.stringify(player.nation) ? 'selected' : '' %>>
+                                        <%= nation.name %></option>
+                                    <% } %>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Position</label>
+                </div>
+                <div class="field-body">
+                    <div class="field is-narrow">
+                        <div class="control">
+                            <div class="select is-fullwidth">
+                                <select name="position">
+                                    <%for (let position of positionList){ %>
+                                    <option value="<%= position.name %>"
+                                        <%= JSON.stringify(position.name) === JSON.stringify(player.position) ? 'selected' : '' %>>
+                                        <%= position.name %></option>
+                                    <% } %>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Goals</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <input class="input is-info" name="goals" type="number" min="0" value="<%= player.goals %>"
+                                required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Is Captain?</label>
+                </div>
+                <div class="field-body">
+                    <div class="field is-narrow">
+                        <div class="control">
+                            <div class="select is-fullwidth">
+                                <select name="isCaptain">
+                                    <option value="<%= player.isCaptain%>">
+                                        <%= player.isCaptain%>
+                                    </option>
+                                    <option value="true">True</option>
+                                    <option value="false">False</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Image</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <input type="url" value="<%= player.image %>" class="input is-info" name="image" type="text" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-horizontal">
+                <div class="field-label is-normal"></div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <button class="button is-primary" type="submit">
+                                Save
+                            </button>
+                            <a href="/players"><button class="button" type="button">
+                                    Back
+                                </button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

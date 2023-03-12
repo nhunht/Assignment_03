@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <style>
+        .input {
+            width: 50%;
+        }
+    </style>
+
+    <title><%= title %></title>
+</head>
+
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://bulma.io">
+                <img src="https://gamek.mediacdn.vn/zoom/600_315/133514250583805952/2022/11/22/avatar1669101028096-1669101028759775287725.png"
+                    width="50" height="150">
+                <h1 style="font-size: xx-large; padding-left: 10px;">FIFA World cup Qatar 2022</h1>
+            </a>
+        </div>
+    </nav>
+    <div class="column">
+        <form method="POST">
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Name</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <input class="input is-info" name="name" type="text" placeholder="e.g. Truc Nhu"
+                                value="<%= user.name %>" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label" for="">YOB</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <input class="input is-info" type="number" min="" max="" name="YOB" id="YOB"
+                                placeholder="Year of birth" value="<%= user.YOB %>" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-horizontal">
+                <div class="field-label is-normal"></div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <button class="button is-primary" type="submit">
+                                Save
+                            </button>
+                            <a href="/users"><button class="button" type="button">
+                                    Back
+                                </button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Handle age from 13 to 40 for yob input
+        $(document).ready(function () {
+            var yearNow = new Date().getFullYear();
+
+            // Change the min and max of input type number
+            $("#YOB").attr("min", yearNow - 40);
+            $("#YOB").attr("max", yearNow - 13);
+        })
+    </script>
+</body>
+
+</html>

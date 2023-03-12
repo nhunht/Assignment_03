@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+    <title><%= title %></title>
+</head>
+
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/">
+                <img src="https://gamek.mediacdn.vn/zoom/600_315/133514250583805952/2022/11/22/avatar1669101028096-1669101028759775287725.png"
+                    width="50" height="150">
+                <h1 style="font-size: xx-large; padding-left: 10px;">FIFA World cup Qatar 2022</h1>
+            </a>
+        </div>
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-light" href="/users/login">
+                            <%= button %>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="tabs is-boxed">
+        <ul>
+            <li>
+                <a href="/">
+                    <span class="icon is-small"><i class="fas fa-home" aria-hidden="true"></i></span>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="/players">
+                    <span class="icon is-small"><i class="fas fa-futbol" aria-hidden="true"></i></span>
+                    <span>Players</span>
+                </a>
+            </li>
+            <li>
+                <a href="/nations">
+                    <span class="icon is-small"><i class="fas fa-flag" aria-hidden="true"></i></span>
+                    <span>Nations</span>
+                </a>
+            </li>
+            <li class="is-active">
+                <a>
+                    <span class="icon is-small"><i class="fas fa-user" aria-hidden="true"></i></span>
+                    <span>Users</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <table class="table is-fullwidth">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Name</th>
+                <th>YOB</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% users.forEach(function(user){ %>
+            <tr>
+                <td><%= user.username %></td>
+                <td><%= user.name %></td>
+                <td><%= user.YOB %></td>
+                <td>
+                    <div class="buttons are-small">
+                        <a href="/users/edit/<%= user.id %>"><button
+                                class="button is-warning is-light ">Edit</button></a>
+                    </div>
+                </td>
+            </tr>
+            <% })%>
+        </tbody>
+    </table>
+
+</body>
+
+</html>

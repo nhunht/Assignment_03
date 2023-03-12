@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Avatar -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+    <title><%= title %></title>
+</head>
+
+<body>
+    <nav class="navbar" style="background: blue;" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <div class="tabs is-large">
+                <a href="/">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV5nyBspTX9fE7joIYpK-1sPcplcNe-a7ErQ&usqp=CAU"
+                        width="120" height="320">
+                </a>
+                <a href="/" style="color: black;">
+                    <span class="icon is-small"><i class="fas fa-home" aria-hidden="true"></i></span>
+                    <span>Home</span>
+                </a>
+                <a href="/players" style="color: black;">
+                    <span class="icon is-small"><i class="fas fa-futbol" aria-hidden="true"></i></span>
+                    <span>Players</span>
+                </a>
+                <a href="/nations" style="color: black;">
+                    <span class="icon is-small"><i class="fas fa-flag" aria-hidden="true"></i></span>
+                    <span>Nations</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="navbar-menu">
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons is-right">
+                        <div class="dropdown is-hoverable" style="color: black;">
+                            <div class="dropdown-trigger">
+                                <i class="fa fa-user" aria-haspopup="true" aria-controls="dropdown-menu"
+                                    aria-hidden="true"></i>
+                                <span>Nguyen Huynh Truc Nhu</span>
+                            </div>
+                            <div class="dropdown-menu notification is-primary is-light" id="dropdown-menu" role="menu">
+                                <span>Welcome!</span>
+                                <div class="dropdown-menu-min-width">
+                                    <a href="/users" class="dropdown-item fa fa-user">
+                                        My profile
+                                    </a>
+                                    <a class="dropdown-item fa fa-key">
+                                        Chang password
+                                    </a>
+                                    <a class="dropdown-item" style="background-color: red; color: white;"
+                                        href="/users/login">
+                                        <%= button %>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="notification is-link is-light" style="background-color: rgb(205, 223, 247);">
+        <section class="container pt-3">
+            <div class="columns is-multiline">
+                <% players.forEach(player=> { %>
+                <div class="column is-one-third" data-target="modal-image">
+                    <div class="card is-shady">
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-left">
+                                    <figure class="image is-48x48">
+                                        <img src="<%= player.nation[0].ensign %>" alt="Nation image">
+                                    </figure>
+                                </div>
+                                <div class="media-content">
+                                    <p class="title is-4"><%= player.name %></p>
+                                </div>
+                                <div class="dropdown is-hoverable">
+                                    <div class="dropdown-trigger">
+                                        <i class="fa fa-bars" aria-haspopup="true" aria-controls="dropdown-menu"
+                                            aria-hidden="true"></i>
+                                    </div>
+                                    <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                                        <div class="dropdown-content">
+                                            <a href="/players/edit/<%= player.id %>" class="dropdown-item"
+                                                style="background-color: green; color: white;">
+                                                Profile
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-image">
+                            <figure class="image is-4by3">
+                                <img src="<%= player.image %>" alt="Placeholder image">
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </section>
+    </div>
+    <nav class="navbar pagination is-centered" role="navigation" aria-label="pagination" role="navigation"
+        aria-label="main navigation">
+        <a class="pagination-previous" style="color: black;" href="?pageIndex=<%= Number(pageIndex) - 1 %>">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i>
+        </a>
+        <a class="pagination-next" style="color: black;" href="?pageIndex=<%= Number(pageIndex) + 1 %>">
+            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+        </a>
+        <ul class="pagination-list">
+            <% for(var i = 1; i <= Number(count); i++) { %>
+            <li><a class="pagination-link" style="color: black;" aria-label="Goto page <%= i %>"
+                    href="?pageIndex=<%= i %>"><%= i %></a></li>
+            <% } %>
+        </ul>
+    </nav>
+</body>
+
+</html>
