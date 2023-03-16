@@ -65,6 +65,7 @@
             </div>
         </div>
     </nav>
+
     <div class="notification is-link is-light" style="background-color: rgb(205, 223, 247);">
         <!-- <div class="field is-horizontal notification">
             <label class="label" style="margin-left: 12px;">Show</label>
@@ -76,6 +77,12 @@
             <label class="label" style="margin-left: 12px;">nations</label>
         </div> -->
         <div class="buttons is-right">
+            <p class="control has-icons-left">
+                <input class="input" type="text" placeholder="Search">
+                <span class="icon is-left">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                </span>
+            </p>
             <button class="button is-primary" style="background-color: green; color: white;" onclick="openPopup()">
                 Add
             </button>
@@ -126,6 +133,7 @@
             </tbody>
         </table>
     </div>
+
     <div id="popup" class="modal">
         <div class="modal-background" onclick="closePopup()"></div>
         <div class="modal-card">
@@ -159,6 +167,23 @@
             </footer>
         </div>
     </div>
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+        <a class="pagination-previous" style="color: black;">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i>
+        </a>
+        <a class="pagination-next" style="color: black;">
+            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+        </a>
+        <ul class="pagination-list">
+            <li><a class="pagination-link" aria-label="Goto page 1">1</a></li>
+            <li><span class="pagination-ellipsis">&hellip;</span></li>
+            <li><a class="pagination-link" aria-label="Goto page 45">45</a></li>
+            <li><a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a></li>
+            <li><a class="pagination-link" aria-label="Goto page 47">47</a></li>
+            <li><span class="pagination-ellipsis">&hellip;</span></li>
+            <li><a class="pagination-link" aria-label="Goto page 86">86</a></li>
+        </ul>
+    </nav>
 
     <script>
         function openPopup() {
