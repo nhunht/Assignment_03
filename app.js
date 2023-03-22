@@ -35,7 +35,7 @@ app.use(session({
   name: 'session-id',
   secret: 'Reallystrongkey123',
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   store: new MongoStore({
     mongoUrl: url,
   })

@@ -1,89 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link
+      href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!------ Include the above in your HEAD tag ---------->
 
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link
+      href="https://fonts.googleapis.com/css?family=Kaushan+Script"
+      rel="stylesheet"
+    />
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
 
     <style>
-        body,
-        html {
-            height: 100%;
-            margin: 0;
-        }
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+      }
 
-        .bg {
-            /* The image used */
-            background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV5nyBspTX9fE7joIYpK-1sPcplcNe-a7ErQ&usqp=CAU");
+      .bg {
+        /* The image used */
+        background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV5nyBspTX9fE7joIYpK-1sPcplcNe-a7ErQ&usqp=CAU");
 
-            /* Full height */
-            height: 100%;
+        /* Full height */
+        height: 100%;
 
-            /* Center and scale the image nicely */
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
     </style>
 
     <title>Login</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="bg">
-        <div class="row ">
-            <div class="col-md-5 mx-auto" style="margin-top: 20vh;">
-                <div id="first">
-                    <article class="message is-link">
-                        <div class="message-header">
-                            <div class="col-md-12 text-center">
-                                <h1>Login</h1>
-                            </div>
-                        </div>
-                        <div class="message-body">
-                            <form method="post" name="login">
-                                <div class="form-group">
-                                    <label class="fas fa-envelope" for="exampleInputEmail1"> Email address</label>
-                                    <input type="email" name="username" class="form-control" id="email"
-                                        aria-describedby="emailHelp" placeholder="Enter email">
-                                </div>
-                                <div class="form-group ">
-                                    <label class="fas fa-key" for="exampleInputEmail1"> Password</label>
-                                    <input type="password" name="password" id="password" class="form-control"
-                                        aria-describedby="emailHelp" placeholder="Enter Password">
-                                </div>
-                                <div class="col-md-12 text-center ">
-                                    <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Signin</button>
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <p class="text-center">
-                                        <a href="/users/login" class="google btn mybtn"><i class="fa fa-googles">
-                                            </i> Signup using Google
-                                        </a>
-                                    </p>
-                                </div>
-                                <div class="form-group">
-                                    <p class="text-center">Don't have account? <a href="/users/register"  style="color: red;">Signup here</a></p>
-                                </div>
-                            </form>
-                        </div>
-                    </article>
+      <div class="row">
+        <div class="col-md-5 mx-auto" style="margin-top: 20vh">
+          <div id="first">
+            <article class="message is-link">
+              <div class="message-header">
+                <div class="col-md-12 text-center">
+                  <h1>Login</h1>
                 </div>
-            </div>
+              </div>
+              <div class="message-body">
+                <form method="post" name="login">
+                  <div class="form-group">
+                    <label class="fas fa-envelope" for="email">
+                      Email address</label
+                    >
+                    <input
+                      type="email"
+                      name="username"
+                      class="form-control"
+                      id="email"
+                      aria-describedby="emailHelp"
+                      placeholder="Enter email"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label class="fas fa-key" for="password">
+                      Password</label
+                    >
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      class="form-control"
+                      aria-describedby="emailHelp"
+                      placeholder="Enter Password"
+                    />
+                    <small id="emailHelp" class="form-text text-muted navbar-end">
+                      <a href="/forgot-password">Forgot Password?</a>
+                    </small>
+                  </div>
+                  <div class="col-md-12 text-center">
+                    <button
+                      type="submit"
+                      class="btn btn-block mybtn btn-primary tx-tfm"
+                    >
+                      Signin
+                    </button>
+                  </div>
+                  <div class="col-md-12 mb-3">
+                    <p class="text-center">
+                      <a href="/login" class="google btn mybtn"
+                        ><i class="fa fa-googles"> </i> Signup using Google
+                      </a>
+                    </p>
+                  </div>
+                  <div class="form-group">
+                    <p class="text-center">
+                      Don't have account?
+                      <a href="/register" style="color: red"
+                        >Signup here</a
+                      >
+                    </p>
+                  </div>
+                </form>
+              </div>
+            </article>
+          </div>
         </div>
+      </div>
     </div>
-
-</body>
+  </body>
+</html>

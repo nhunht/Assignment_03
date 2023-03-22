@@ -5,7 +5,7 @@ const utils = require('../auth/utils');
 
 playersRouter.route('/')
     .get((req, res, next) => {
-        req.isAuthenticated() ? next() : res.redirect('/users/login')
+        req.isAuthenticated() ? next() : res.redirect('/login')
     }, playerController.index)
     .post(utils.checkIsAdmin, playerController.create);
 playersRouter.route('/edit/:playerId')

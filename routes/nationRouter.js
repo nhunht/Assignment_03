@@ -5,7 +5,7 @@ const utils = require('../auth/utils');
 
 nationsRouter.route('/')
     .get((req, res, next) => {
-        req.isAuthenticated() ? next() : res.redirect('/users/login')
+        req.isAuthenticated() ? next() : res.redirect('/login')
     }, nationController.index)
     .post(utils.checkIsAdmin, nationController.create);
 nationsRouter.route('/edit/:nationId')
