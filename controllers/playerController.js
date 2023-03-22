@@ -1,84 +1,101 @@
-const Players = require('../models/player')
-const Nations = require('../models/nation')
+const Players = require("../models/player");
+const Nations = require("../models/nation");
 
-let positionData = [{
-        "id": "1",
-        "name": "Goalkeeper"
-    },
-    {
-        "id": "2",
-        "name": "Midfielder"
-    },
-    {
-        "id": "3",
-        "name": "Right Backs"
-    },
-    {
-        "id": "4",
-        "name": "Left Backs"
-    },
-    {
-        "id": "8",
-        "name": "Wingers"
-    },
-]
+let positionData = [
+  {
+    id: "1",
+    name: "Goalkeeper",
+  },
+  {
+    id: "2",
+    name: "Midfielder",
+  },
+  {
+    id: "3",
+    name: "Right Backs",
+  },
+  {
+    id: "4",
+    name: "Left Backs",
+  },
+  {
+    id: "8",
+    name: "Wingers",
+  },
+];
 
 class PlayerController {
-    async index(req, res, next) {
-        var players = await Players.find();
-        var nations = await Nations.find();
+  async index(req, res, next) {
+    let pageSize = req.query.pageSize || 6;
+    let pageIndex = req.query.pageIndex || 1;
+    // count all players document
+    let count = await Players.countDocuments();
 
-        res.render('players', {
-            title: 'Players',
-            players: players,
+    var players = await Players.find()
+      .skip((pageIndex - 1) * pageSize)
+      .limit(pageSize);
+    var nations = await Nations.find();
+
+    res.render("players", {
+      title: "Players",
+      players: players,
+      nations: nations,
+      positionList: positionData,
+      button: req.isAuthenticated() ? "Logout" : "Login",
+      isAdmin: req.user.isAdmin ? "" : "hidden",
+      count: Math.ceil(count / pageSize),
+      pageIndex: pageIndex,
+    });
+  }
+
+  create(req, res, next) {
+    const player = new Players(req.body);
+    player
+      .save()
+      .then(() => res.redirect("/players"))
+      .catch((error) => {});
+  }
+
+  formEdit(req, res, next) {
+    const playerId = req.params.playerId;
+    Players.findById(playerId)
+      .then((player) => {
+        Nations.find({}).then((nations) => {
+          res.render("editPlayer", {
+            title: "The detail of Player",
+            player: player,
             nations: nations,
             positionList: positionData,
-            button: req.isAuthenticated() ? 'Logout' : 'Login',
-            isAdmin: req.user.isAdmin ? '' : 'hidden',
+          });
         });
-    }
+      })
+      .catch(next);
+  }
 
-    create(req, res, next) {
-        const player = new Players(req.body);
-        player.save()
-            .then(() => res.redirect('/players'))
-            .catch(error => {});
-    }
+  edit(req, res, next) {
+    Players.updateOne(
+      {
+        _id: req.params.playerId,
+      },
+      req.body
+    )
+      .then(() => {
+        res.redirect("/players");
+      })
+      .catch(next);
+  }
 
-    formEdit(req, res, next) {
-        const playerId = req.params.playerId;
-        Players.findById(playerId)
-            .then((player) => {
-                Nations.find({}).then((nations) => {
-                    res.render('editPlayer', {
-                        title: 'The detail of Player',
-                        player: player,
-                        nations: nations,
-                        positionList: positionData
-                    })
-                })
-            })
-            .catch(next);
-    }
-
-    edit(req, res, next) {
-        Players.updateOne({
-                _id: req.params.playerId
-            }, req.body)
-            .then(() => {
-                res.redirect('/players')
-            })
-            .catch(next)
-    }
-
-    delete(req, res, next) {
-        Players.deleteOne({
-                _id: req.params.playerId
-            }, req.body)
-            .then(() => {
-                res.redirect('/players')
-            })
-            .catch(next)
-    }
+  delete(req, res, next) {
+    Players.deleteOne(
+      {
+        _id: req.params.playerId,
+      },
+      req.body
+    )
+      .then(() => {
+        res.redirect("/players");
+      })
+      .catch(next);
+  }
 }
-module.exports = new PlayerController;
+module.exports = new PlayerController();

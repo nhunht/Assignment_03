@@ -248,21 +248,19 @@
             </footer>
         </div>
     </div>
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-        <a class="pagination-previous" style="color: black;">
+    <nav class="navbar pagination is-centered" role="navigation" aria-label="pagination" role="navigation"
+        aria-label="main navigation">
+        <a class="pagination-previous" style="color: black;" href="?pageIndex=<%= Number(pageIndex) - 1 %>">
             <i class="fas fa-arrow-left" aria-hidden="true"></i>
         </a>
-        <a class="pagination-next" style="color: black;">
+        <a class="pagination-next" style="color: black;" href="?pageIndex=<%= Number(pageIndex) + 1 %>">
             <i class="fas fa-arrow-right" aria-hidden="true"></i>
         </a>
         <ul class="pagination-list">
-            <li><a class="pagination-link" aria-label="Goto page 1">1</a></li>
-            <li><span class="pagination-ellipsis">&hellip;</span></li>
-            <li><a class="pagination-link" aria-label="Goto page 45">45</a></li>
-            <li><a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a></li>
-            <li><a class="pagination-link" aria-label="Goto page 47">47</a></li>
-            <li><span class="pagination-ellipsis">&hellip;</span></li>
-            <li><a class="pagination-link" aria-label="Goto page 86">86</a></li>
+            <% for(var i = 1; i <= Number(count); i++) { %>
+            <li><a class="pagination-link" style="color: black;" aria-label="Goto page <%= i %>"
+                    href="?pageIndex=<%= i %>"><%= i %></a></li>
+            <% } %>
         </ul>
     </nav>
 

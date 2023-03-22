@@ -67,21 +67,36 @@
     </nav>
 
     <div class="notification is-link is-light" style="background-color: rgb(205, 223, 247);">
-        <!-- <div class="field is-horizontal notification">
-            <label class="label" style="margin-left: 12px;">Show</label>
-            <select name="pageSize" style="margin-left: 12px; padding-bottom: 4px; padding-left: 4px;">
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="20">20</option>
-            </select>
-            <label class="label" style="margin-left: 12px;">nations</label>
-        </div> -->
         <div class="buttons is-right">
             <div class="control has-icons-left" style="margin-bottom: 6px;">
                 <input class="input" type="text" placeholder="Search">
                 <span class="icon is-left">
                     <i class="fas fa-search" aria-hidden="true"></i>
                 </span>
+            </div>
+
+            <div class="dropdown">
+                <div class="dropdown-trigger">
+                    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
+                        <span>Click me</span>
+                        <span class="icon is-small">
+                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+                    <div class="dropdown-content">
+                        <a href="#" class="dropdown-item">
+                            Overview
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            Modifiers
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            Grid
+                        </a>
+                    </div>
+                </div>
             </div>
             <button class="button is-primary" style="background-color: green; color: white;" onclick="openPopup()">
                 Add
@@ -167,21 +182,19 @@
             </footer>
         </div>
     </div>
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-        <a class="pagination-previous" style="color: black;">
+    <nav class="navbar pagination is-centered" role="navigation" aria-label="pagination" role="navigation"
+        aria-label="main navigation">
+        <a class="pagination-previous" style="color: black;" href="?pageIndex=<%= Number(pageIndex) - 1 %>">
             <i class="fas fa-arrow-left" aria-hidden="true"></i>
         </a>
-        <a class="pagination-next" style="color: black;">
+        <a class="pagination-next" style="color: black;" href="?pageIndex=<%= Number(pageIndex) + 1 %>">
             <i class="fas fa-arrow-right" aria-hidden="true"></i>
         </a>
         <ul class="pagination-list">
-            <li><a class="pagination-link" aria-label="Goto page 1">1</a></li>
-            <li><span class="pagination-ellipsis">&hellip;</span></li>
-            <li><a class="pagination-link" aria-label="Goto page 45">45</a></li>
-            <li><a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a></li>
-            <li><a class="pagination-link" aria-label="Goto page 47">47</a></li>
-            <li><span class="pagination-ellipsis">&hellip;</span></li>
-            <li><a class="pagination-link" aria-label="Goto page 86">86</a></li>
+            <% for(var i = 1; i <= Number(count); i++) { %>
+            <li><a class="pagination-link" style="color: black;" aria-label="Goto page <%= i %>"
+                    href="?pageIndex=<%= i %>"><%= i %></a></li>
+            <% } %>
         </ul>
     </nav>
 
@@ -201,8 +214,6 @@
                 name: formData.get('name'),
                 description: formData.get('description')
             }
-
-            console.log(nation.ensign);
 
             var xhr = new XMLHttpRequest();
             xhr.open('POST', '/nations', true);
